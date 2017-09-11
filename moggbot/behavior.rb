@@ -1,7 +1,5 @@
 puts 'behavior was loaded'
 module Behavior 
-  #玩家座標 return players[0]["temp"]["to"]
-
   BEHAVE_DTIME = 600 #ms
 
   def go direction
