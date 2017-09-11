@@ -3,18 +3,12 @@ module Behavior
   #玩家座標 return players[0]["temp"]["to"]
 
   BEHAVE_DTIME = 600 #ms
-  KEY_MAP = {
-    up: 'w',
-    right: 'd',
-    down: 's',
-    left: 'a'
-  }
 
   def go direction
     loop do 
       puts 'trying to move:  ' + direction.to_s
       @pre_pos = get_pos
-      @client.send_keys Array.new(20){ KEY_MAP[direction] }
+      @client.process_move direction
       tick
       @pos = get_pos
       if move_success? direction
@@ -26,7 +20,7 @@ module Behavior
   end 
 
   def get_pos
-    @client.execute_script 'return players[0]["temp"]["to"]'
+    @client.get_pos
   end
 
   def tick
@@ -47,6 +41,6 @@ module Behavior
   end
 
   def active? 
-    @client.execute_script 'return MOGG_TRIGGER;'
+    @client.is_active?
   end
 end

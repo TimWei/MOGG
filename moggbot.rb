@@ -1,6 +1,5 @@
 class Moggbot
   include Behavior
-  include Client
 
   BOT_STATE = {
     :STOP => 0,
@@ -11,7 +10,7 @@ class Moggbot
   def initialize client
     case client
     when :web
-      @client = launch_client
+      @client = WebClient.new
     end
     @state = BOT_STATE[:PAUSE]
     @pos = {}
