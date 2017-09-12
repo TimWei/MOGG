@@ -1,4 +1,5 @@
-class Moggbot
+puts 'bot loaded'
+class Bot
   include Behavior
 
   BOT_STATE = {
@@ -7,15 +8,13 @@ class Moggbot
     :PAUSE => 2
   }
 
-  def initialize client
-    case client
-    when :web
-      @client = WebClient.new
-    end
+  def initialize opt={}
+    # 注入Client纇
+    @client = opt[:client] || raise('Client not available')
     @state = BOT_STATE[:PAUSE]
     @pos = {}
     @pre_pos = {}
-    @moves = MOVE_PATH
+    @path = opt[:path] || []
   end
 
   def start
@@ -23,9 +22,9 @@ class Moggbot
       case @state
       when BOT_STATE[:START]
         if active?
-          move = @moves.shift
-          go move
-          @moves.push move
+          next_pos = @path.shift
+          move next_pos
+          @path.push next_pos
         else
           puts 'Bot Pause!'
           @state = BOT_STATE[:PAUSE]

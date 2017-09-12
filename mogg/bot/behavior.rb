@@ -1,8 +1,8 @@
-puts 'behavior was loaded'
+puts 'bot/behavior loaded'
 module Behavior 
-  BEHAVE_DTIME = 600 #ms
+  BEHAVE_DTIME = 150 #ms
 
-  def go direction
+  def move direction
     loop do 
       puts 'trying to move:  ' + direction.to_s
       @pre_pos = get_pos
@@ -22,7 +22,7 @@ module Behavior
   end
 
   def tick
-    sleep (BEHAVE_DTIME..1200).map{|t| t}.sample.to_f / 1000
+    sleep (BEHAVE_DTIME..700).map{|t| t}.sample.to_f / 1000
   end
 
   def move_success? direction
