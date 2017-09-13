@@ -5,11 +5,11 @@ module Behavior
   def move direction
     loop do 
       puts 'trying to move:  ' + direction.to_s
-      @pre_pos = get_pos
-      @client.process_move direction
+      @pre_pos              = get_pos
+      @client.process_move  direction
       tick
-      @pos = get_pos
-      if move_success? direction
+      @pos                  = get_pos
+      if move_success?      direction
         break
       else
         puts 'move failed, retry'

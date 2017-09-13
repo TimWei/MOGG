@@ -2,7 +2,7 @@ puts 'client loaded'
 class WebClient
   prepend InjectUi
 
-  KEY_MAP = {
+  KEY_MAP       = {
     up: 'w',
     right: 'd',
     down: 's',
@@ -10,7 +10,7 @@ class WebClient
   }
 
   def initialize opt
-    @browser = Watir::Browser.new :chrome
+    @browser    = Watir::Browser.new :chrome
     @browser.goto opt[:url]    
   end
 

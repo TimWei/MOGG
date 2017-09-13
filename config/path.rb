@@ -1,4 +1,4 @@
 #####
 #  example: 
-#    MOVE_PATH = [[:up,3],[:down, 5]]
-MOVE_PATH = [:up, :down]
+#    MOVE_PATH = [[:up,2],[:down, 2]]
+MOVE_PATH = []
