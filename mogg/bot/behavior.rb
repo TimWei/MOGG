@@ -1,6 +1,6 @@
 puts 'bot/behavior loaded'
 module Behavior 
-  BEHAVE_DTIME = 150 #ms
+  BEHAVE_DTIME = 200 #ms
 
   def move direction
     loop do 
