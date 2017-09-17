@@ -40,6 +40,7 @@ module Behavior
 
   def reload_path
     @path           = @path_blueprint.clone  
+    @back_path           = []
     @client.reloaded
   end
 
