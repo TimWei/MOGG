@@ -29,4 +29,8 @@ class WebClient
   def is_reload?
     @browser.execute_script 'return MOGG_RELOAD;'
   end
+
+  def reloaded
+    @browser.execute_script 'MOGG_RELOAD = !MOGG_RELOAD;'
+  end
 end

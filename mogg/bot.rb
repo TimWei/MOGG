@@ -13,7 +13,7 @@ class Bot
     # 注入Client纇
     @client         = opt[:client] || raise('Client not available')
     @state          = BOT_STATE[:PAUSE]
-    @path_blueprint = opt[:path] || []
+    @path_blueprint = opt[:path] || [[:up,1],[:down,1]]
     @path           = @path_blueprint.clone
     @back_path      = []
     @pos            = {}
@@ -22,7 +22,7 @@ class Bot
 
   def start
     loop do 
-      @state    = BOT_STATE[:RELOAD] if is_reload?
+      @state    = BOT_STATE[:RELOAD] if reload?
       case @state
       when BOT_STATE[:START]
         if active?
@@ -51,6 +51,7 @@ class Bot
       when BOT_STATE[:RELOAD]
         puts 'Bot Path Reload!'
         reload_path
+        puts 'Bot Pause!'
         @state            = BOT_STATE[:PAUSE]
       end
       break if @state == BOT_STATE[:STOP]

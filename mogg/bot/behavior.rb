@@ -39,8 +39,8 @@ module Behavior
   end
 
   def reload_path
-    p 'path reloaded'
     @path           = @path_blueprint.clone  
+    @client.reloaded
   end
 
   def active? 
