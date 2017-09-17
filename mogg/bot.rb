@@ -3,23 +3,26 @@ class Bot
   include Behavior
 
   BOT_STATE = {
-    :STOP => 0,
-    :START => 1,
-    :PAUSE => 2
+    :STOP   => 0,
+    :START  => 1,
+    :PAUSE  => 2,
+    :RELOAD => 3,
   }
 
   def initialize opt={}
     # 注入Client纇
-    @client     = opt[:client] || raise('Client not available')
-    @state      = BOT_STATE[:PAUSE]
-    @pos        = {}
-    @pre_pos    = {}
-    @path       = opt[:path] || []
-    @back_path  = []
+    @client         = opt[:client] || raise('Client not available')
+    @state          = BOT_STATE[:PAUSE]
+    @path_blueprint = opt[:path] || []
+    @path           = @path_blueprint.clone
+    @back_path      = []
+    @pos            = {}
+    @pre_pos        = {}
   end
 
   def start
     loop do 
+      @state    = BOT_STATE[:RELOAD] if is_reload?
       case @state
       when BOT_STATE[:START]
         if active?
@@ -45,6 +48,10 @@ class Bot
         else 
           @state            = BOT_STATE[:PAUSE] 
         end
+      when BOT_STATE[:RELOAD]
+        puts 'Bot Path Reload!'
+        reload_path
+        @state            = BOT_STATE[:PAUSE]
       end
       break if @state == BOT_STATE[:STOP]
     end
@@ -58,7 +65,7 @@ class Bot
       right:  :left
     }[direction]  
   end
-  
+
   def path_test
     if @path.empty?
       @path           = @back_path

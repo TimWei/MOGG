@@ -25,4 +25,8 @@ class WebClient
   def is_active?
     @browser.execute_script 'return MOGG_TRIGGER;'
   end
+
+  def is_reload?
+    @browser.execute_script 'return MOGG_RELOAD;'
+  end
 end
