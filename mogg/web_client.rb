@@ -15,7 +15,7 @@ class WebClient
   end
 
   def process_move direction
-    @browser.send_keys Array.new(7){ KEY_MAP[direction] }
+    @browser.send_keys Array.new(10){ KEY_MAP[direction] }
   end
 
   def get_pos
